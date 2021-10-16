@@ -59,7 +59,10 @@ if __name__ == "__main__":
 
     kss = Keyword_Spotting_Service()
 
-    keyword1 = kss.predict("recordings/seven/7_george_20.wav")
-    keyword2 = kss.predict("test/two.wav")
+    keyword1 = kss.predict('test/test0.wav')
+    keyword2 = kss.predict('test/test1.wav')
+    keyword3 = kss.predict('test/test2.wav')
+    keyword4 = kss.predict('test/test3.wav')
+    
 
-    print(f"Predicted keyword: {keyword1}, {keyword2}")
+    print(f"Predicted keyword: {keyword1}, {keyword2}, {keyword3}, {keyword4}")
