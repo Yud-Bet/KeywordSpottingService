@@ -2,8 +2,10 @@ import tensorflow.keras as keras
 import numpy as np
 import librosa
 from tensorflow.python.keras.backend import sign
+import make_data
+import os
 
-MODEL_PATH = "model.h5"
+MODEL_PATH = "huan.h5"
 SAMPLES_TO_CONSIDER = 22050
 
 class _KeyWord_Spotting_Service:
@@ -37,7 +39,9 @@ class _KeyWord_Spotting_Service:
         return predicted_keyword
 
     def preprocess(self, file_path, n_mfcc=13, n_fft=2048, hop_length=512):
-        signal, sr = librosa.load(file_path)
+        make_data.prepare_data(file_path)
+        temp_file = os.path.join(os.path.curdir, os.path.basename(file_path).split('.')[0]) + '.wav'
+        signal, sr = librosa.load(temp_file)
 
         if (len(signal) >= SAMPLES_TO_CONSIDER):
             signal = signal[:SAMPLES_TO_CONSIDER]
@@ -45,7 +49,7 @@ class _KeyWord_Spotting_Service:
             signal = librosa.util.fix_length(signal, SAMPLES_TO_CONSIDER)
         
         MFCCs = librosa.feature.mfcc(signal, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length)
-
+        os.remove(temp_file)
         return MFCCs.T
 
 def Keyword_Spotting_Service():
@@ -58,11 +62,11 @@ def Keyword_Spotting_Service():
 if __name__ == "__main__":
 
     kss = Keyword_Spotting_Service()
-
     keyword1 = kss.predict('test/test0.wav')
     keyword2 = kss.predict('test/test1.wav')
     keyword3 = kss.predict('test/test2.wav')
     keyword4 = kss.predict('test/test3.wav')
+    keyword5 = kss.predict('test/two2.wav')
     
 
-    print(f"Predicted keyword: {keyword1}, {keyword2}, {keyword3}, {keyword4}")
+    print(f"Predicted keyword: {keyword1}, {keyword2}, {keyword3}, {keyword4}, {keyword5}")

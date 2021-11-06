@@ -5,11 +5,11 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras import optimizers
 from tensorflow.python.keras import regularizers
 
-DATA_PATH = "data.json"
+DATA_PATH = "huan.json"
 LEARNING_RATE = 0.0001
 EPOCHS = 40
 BATCH_SIZE = 32
-SAVED_MODEL_PATH = "model.h5"
+SAVED_MODEL_PATH = "huan.h5"
 
 NUM_KEYWORDS = 10
 
