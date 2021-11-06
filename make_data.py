@@ -13,14 +13,14 @@ def change_file_name(dir_path, keyword, people):
 def convert_to_wav8k1c(src_path, dst_path):
     for filename in os.listdir(src_path):
         name = filename.split('.')[0]
-        command = f'ffmpeg -i {os.path.join(src_path, filename)} -ar 8000 -ac 1 {os.path.join(dst_path, name)}.wav'
+        command = f'ffmpeg/bin/ffmpeg -i {os.path.join(src_path, filename)} -ar 8000 -ac 1 {os.path.join(dst_path, name)}.wav'
         subprocess.call(command)
 
 def convert_to_wav8k1c(file_path):
     dir = os.path.dirname(file_path)
     file_name = os.path.basename(file_path)
     file_name = file_name.split('.')[0]
-    command = f'ffmpeg -i {file_path} -ar 8000 -ac 1 {os.path.join(os.path.curdir, file_name)}.wav'
+    command = f'ffmpeg/bin/ffmpeg -i {file_path} -ar 8000 -ac 1 {os.path.join(os.path.curdir, file_name)}.wav'
     subprocess.call(command, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
 def trim_silence(audio, noise_threshold=150):
