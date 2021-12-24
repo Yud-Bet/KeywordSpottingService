@@ -39,9 +39,9 @@ class _KeyWord_Spotting_Service:
         return predicted_keyword
 
     def preprocess(self, file_path, n_mfcc=13, n_fft=2048, hop_length=512):
-        make_data.prepare_data(file_path)
-        temp_file = os.path.join(os.path.curdir, os.path.basename(file_path).split('.')[0]) + '.wav'
-        signal, sr = librosa.load(temp_file)
+        # make_data.prepare_data(file_path)
+        # temp_file = os.path.join(os.path.curdir, os.path.basename(file_path).split('.')[0]) + '.wav'
+        signal, sr = librosa.load(file_path)
 
         if (len(signal) >= SAMPLES_TO_CONSIDER):
             signal = signal[:SAMPLES_TO_CONSIDER]
@@ -49,7 +49,6 @@ class _KeyWord_Spotting_Service:
             signal = librosa.util.fix_length(signal, SAMPLES_TO_CONSIDER)
         
         MFCCs = librosa.feature.mfcc(signal, n_mfcc=n_mfcc, n_fft=n_fft, hop_length=hop_length)
-        os.remove(temp_file)
         return MFCCs.T
 
 def Keyword_Spotting_Service():
