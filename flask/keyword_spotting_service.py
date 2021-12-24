@@ -1,9 +1,6 @@
 import tensorflow.keras as keras
 import numpy as np
 import librosa
-from tensorflow.python.keras.backend import sign
-import make_data
-import os
 
 MODEL_PATH = "huan.h5"
 SAMPLES_TO_CONSIDER = 22050
